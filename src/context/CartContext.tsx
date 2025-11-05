@@ -69,31 +69,6 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
     return () => unsubscribe();
   }, []);
 
-    /*
-    //Place Order to Firestore
-      const placeOrder = async () => {
-        const user = auth.currentUser;
-        if (!user) return;
-
-        const cartRef = collection(db, "users", user.uid);
-        const cartSnapshot = await getDocs(cartRef);
-
-        if (cartSnapshot.empty) return alert("Your cart is empty!");
-
-        const items = cartSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        const totalAmount = getTotalPrice();
-
-        // Add order to Firestore
-        const ordersRef = collection(db, "users", user.uid,"orders");
-        await addDoc(ordersRef, {
-          items,
-          totalAmount,
-          orderDate: serverTimestamp(),
-        });
-        alert("Order placed successfully!");
-      };
-      */
-
   //Place order - returning orderId
   // 🧾 Place Order and return orderId
  const placeOrder = async () => {

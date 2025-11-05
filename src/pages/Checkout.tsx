@@ -45,104 +45,7 @@ const Checkout = () => {
     setStep(3);
   };
 
-/*
-const handlePaymentSubmit = (e: React.FormEvent) => {
-  e.preventDefault();
-  if(paymentMethod === "cod" ){
-  try {
-    setTimeout(async () => {
-      const user = auth.currentUser;
-      if (!user) return;
-
-      const orderId = await placeOrder();
-      console.log("Order ID is:", orderId);
-      
-      if (!orderId) return;
-
-      const orderRef = doc(db, "users", user.uid, "orders", orderId);
-
-      // ✅ Update order with checkout details
-      await updateDoc(orderRef, {
-        shippingInfo,
-        installationDate,
-        installationTime,
-        tax,
-        total,
-      });
-
-      //Send Email Confirmation
-      // ✅ Fetch complete order data from Firestore
-      const orderSnap = await getDoc(orderRef);
-      if (!orderSnap.exists()) {
-        console.error("Order not found in Firestore");
-        return;
-      }
-
-      const orderData = orderSnap.data();
-
-      // ✅ Generate HTML table for items
-      const itemsHtml = (orderData.items || [])
-        .map(
-          (item: any) => `
-          <tr>
-            <td style="border: 1px solid #ddd; padding: 10px; font-size: 14px;">${item.name || "Unknown"}</td>
-            <td style="border: 1px solid #ddd; padding: 10px; font-size: 14px;">${item.quantity}</td>
-            <td style="border: 1px solid #ddd; padding: 10px; font-size: 14px;">₹${(
-              item.price || 0
-            ).toLocaleString()}</td>
-          </tr>`
-        )
-        .join("");
-
-      // ✅ Combine everything into email params
-      const emailParams = {
-        name: user.displayName || "Customer",
-        email: user.email,
-        orderId: orderId,
-        payment_method: orderData.paymentMethod || "N/A",
-        installation_date: orderData.installationDate || "N/A",
-        installation_time: orderData.installationTime || "N/A",
-        shipping_address:
-          orderData.shippingInfo?.address ||
-          `${orderData.shippingInfo?.street || ""}, ${
-            orderData.shippingInfo?.city || ""
-          }`,
-        subtotal: (orderData.total - orderData.tax).toFixed(2),
-        tax: orderData.tax.toFixed(2),
-        total: orderData.total.toFixed(2),
-        items_table: `
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
-            <tr style="background:#f2f2f2;">
-              <th style="border: 1px solid #ddd; padding: 10px; font-size: 14px background: #f1f5ff; text-align: left;">Item</th>
-              <th style="border: 1px solid #ddd; padding: 10px; font-size: 14px background: #f1f5ff; text-align: left;">Qty</th>
-              <th style="border: 1px solid #ddd; padding: 10px; font-size: 14px background: #f1f5ff; text-align: left;">Price</th>
-            </tr>
-            ${itemsHtml}
-          </table>
-          
-        `,
-      };
-
-      // ✅ Send email via EmailJS
-      await emailjs.send(
-        "service_w68sbak", // EmailJS Service ID
-        "template_5ny3toh", // Template ID
-        emailParams,
-        "b__8bJCneOE0SlqZ6" // Public key
-      );
-
-      console.log("✅ Order confirmation email sent with full order details!");
-
-      navigate("/order-confirmation", { state: { orderId } });
-      clearCart();
-      
-    }, 2000);
-  } catch (error) {
-    console.error("Error placing order:", error);
-  }
-};
-*/
-
+//payment Submit Button
 const handlePaymentSubmit = (e: React.FormEvent) => {
   e.preventDefault();
 
@@ -394,13 +297,6 @@ const handlePaymentSubmit = (e: React.FormEvent) => {
               );
 
               console.log("✅ Order confirmation email sent with full order details!");
-
-
-                // 7️⃣ Clear cart and navigate
-                //clearCart();
-                
-                //navigate("/order-confirmation", { state: { orderId } });
-                //alert("✅ Payment Successful! Your order has been placed.");
             } catch (error) {
               console.error("❌ Error after payment:", error);
             }
@@ -425,7 +321,6 @@ const handlePaymentSubmit = (e: React.FormEvent) => {
   }
 
   if (items.length === 0) {
-    //navigate('/cart');
     return null;
   }
 

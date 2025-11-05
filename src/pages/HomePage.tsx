@@ -507,17 +507,6 @@ const HomePage = () => {
               <ArrowRight className="h-5 w-5" />
             </Link>
 
-            {/*
-            <Link
-              to="/uploadProducts"
-             //className="modern-button inline-flex items-center space-x-3 bg-blue-875 text-white px-16 py-5 rounded-2xl text-xl font-semibold hover:bg-blue-875 shadow-2xl"
-            className="modern-button inline-flex items-center bg-blue-875 text-white px-12 py-4 rounded-2xl text-lg font-medium hover:bg-blue-875 flex items-center justify-center space-x-3 shadow-2xl"
-            >
-              <span>Upload now</span>
-              <ArrowRight className="h-5 w-5" />
-            </Link>
-            */}
-
           </div>
         </div>
       </section>

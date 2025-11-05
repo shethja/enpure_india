@@ -97,14 +97,6 @@ const Orders: React.FC = () => {
               <p className="text-lg font-semibold text-blue-900">
                 ₹{order.total}
               </p>
-              {/*
-              <p className="text-lg font-medium text-gray-900">
-                ₹{order.totalAmount_beforeTax}
-              </p>
-              <p className="text-lg font-small text-gray-900">
-                ₹{order.tax}
-              </p>
-              */}
               </div>
             </div>
 
