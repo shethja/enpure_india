@@ -50,8 +50,28 @@ const ProductDetail = () => {
   const handleAddToCart = () => {
     product.defaultColor = selectedDefaultColor;
     addToCart(product, quantity);
+    
+    //Add to Cart GA-GTM
+    window.dataLayer.push({
+    event: "add_to_cart",
+    ecommerce: {
+    currency: "INR",
+    value: product.price * quantity,
+    items: [{
+      item_id: product.id,
+      item_name: product.name,
+      price: product.price,
+      item_brand: "Enpure",
+      item_category: product.category,
+      quantity: quantity,
+      item_variant: product.defaultColor // if you added color
+    }]
+      }
+    });
+
     product.defaultColor = "Black";
     navigate("/products");
+
   };
 
   //const currentUser = auth.currentUser;
@@ -129,6 +149,24 @@ const ProductDetail = () => {
   //Real-time Listener for both likes and reviews
   useEffect(() => {
   if (!product) return;
+
+  //Product Detail Page - View Item GA-GTM
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "view_item",
+    ecommerce: {
+      currency: "INR",
+      value: product.price,
+      items: [{
+        item_id: product.id,
+        item_name: product.name,
+        price: product.price,
+        item_brand: "Enpure",
+        item_category: product.category
+      }]
+    }
+  });
+
 
   const feedbackRef = doc(db, 'productFeedback', product.id);
 

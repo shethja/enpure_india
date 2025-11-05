@@ -173,6 +173,24 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
         updatedItems = [...currentItems, { product, quantity }];
       }
 
+      //Add to Cart GA-GTM
+      window.dataLayer.push({
+        event: "add_to_cart",
+        ecommerce: {
+        currency: "INR",
+        value: product.price * quantity,
+        items: [{
+          item_id: product.id,
+          item_name: product.name,
+          price: product.price,
+          item_brand: "Enpure",
+          item_category: product.category,
+          quantity: quantity,
+          item_variant: product.defaultColor // if you added color
+        }]
+          }
+        });
+
       saveCartToFirestore(updatedItems);
       return updatedItems;
     });

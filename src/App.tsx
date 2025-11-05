@@ -24,6 +24,8 @@ import OrderConfirmation from './pages/OrderConfirmation';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import ScrollToTop from './components/ScrollToTop';
+import usePageView from './analytics/usepageView';
+
 //import "./uploadProducts";
 //import UploadProducts from './pages/UploadProducts';
 //import { ToastContainer } from 'react-toastify';
@@ -35,12 +37,14 @@ function App() {
   //useEffect(() => {
     //uploadBlogs(); // ⚠️ Run once then remove this line after upload
   //}, []);
+  //usePageView();
 
   return (
     <AuthProvider>
       <CartProvider>
         <Router>
           <ScrollToTop />
+          <PageViewWrapper />
           <div className="min-h-screen bg-white">
             <Header />
             <main>
@@ -74,6 +78,11 @@ function App() {
       </CartProvider>
     </AuthProvider>
   );
+}
+
+function PageViewWrapper() {
+  usePageView();
+  return null;
 }
 
 export default App;
